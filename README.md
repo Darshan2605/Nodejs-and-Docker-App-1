@@ -2,7 +2,7 @@
 
 
 
-### #######With Docker##########
+### With Docker
 
 #### To start the application
 
