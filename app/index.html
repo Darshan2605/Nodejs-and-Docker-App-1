@@ -1,0 +1,149 @@
+<html lang="en">
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 80%;
+            max-width: 600px;
+            text-align: center;
+        }
+        .button {
+            width: 160px;
+            height: 45px;
+            border-radius: 6px;
+            font-size: 15px;
+            margin-top: 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+        img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            display: block;
+            margin: 20px auto;
+        }
+        hr {
+            width: 80%;
+            margin: 20px auto;
+            border: 0;
+            border-top: 1px solid #eee;
+        }
+        h3 {
+            display: inline-block;
+            margin: 0;
+        }
+        #container {
+            display: none;
+        }
+        #container-edit {
+            display: none;
+        }
+        #container-edit input {
+            height: 32px;
+            width: calc(100% - 20px);
+            font-size: 15px;
+            margin-bottom: 10px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class='container' id='container'>
+        <h1>User Profile</h1>
+        <img src='profile-picture' alt="user-profile">
+        <span>Name: </span><h3 id='name'>Darshan</h3>
+        <hr />
+        <span>Email: </span><h3 id='email'>Darshan@example.com</h3>
+        <hr />
+        <span>Interests: </span><h3 id='interests'>coding</h3>
+        <hr />
+        <button class='button' onclick="updateProfile()">Edit Profile</button>
+    </div>
+    <div class='container' id='container-edit'>
+        <h1>Edit Profile</h1>
+        <img src='profile-picture' alt="user-profile">
+        <span>Name: </span><input type="text" id='input-name' value='Anna Smith' />
+        <hr />
+        <span>Email: </span><input type="email" id='input-email' value='anna.smith@example.com' />
+        <hr />
+        <span>Interests: </span><input type="text" id='input-interests' value='coding' />
+        <hr />
+        <button class='button' onclick="handleUpdateProfileRequest()">Update Profile</button>
+    </div>
+    <script>
+        (async function init() {
+            const response = await fetch('http://localhost:3000/get-profile');
+            const user = await response.json();
+
+            document.getElementById('name').textContent = user.name ? user.name : 'Anna Smith';
+            document.getElementById('email').textContent = user.email ? user.email : 'anna.smith@example.com';
+            document.getElementById('interests').textContent = user.interests ? user.interests : 'coding';
+
+            const cont = document.getElementById('container');
+            cont.style.display = 'block';
+        })();
+
+        async function handleUpdateProfileRequest() {
+            const contEdit = document.getElementById('container-edit');
+            const cont = document.getElementById('container');
+
+            const payload = {
+                name: document.getElementById('input-name').value, 
+                email: document.getElementById('input-email').value, 
+                interests: document.getElementById('input-interests').value
+            };
+            
+            const response = await fetch('http://localhost:3000/update-profile', {
+                method: "POST",
+                headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            });
+            const jsonResponse = await response.json();
+
+            document.getElementById('name').textContent = jsonResponse.name;
+            document.getElementById('email').textContent = jsonResponse.email;
+            document.getElementById('interests').textContent = jsonResponse.interests;
+
+            cont.style.display = 'block';
+            contEdit.style.display = 'none';
+        }
+
+        function updateProfile() {
+            const contEdit = document.getElementById('container-edit');
+            const cont = document.getElementById('container');
+
+            document.getElementById('input-name').value = document.getElementById('name').textContent;
+            document.getElementById('input-email').value = document.getElementById('email').textContent;
+            document.getElementById('input-interests').value = document.getElementById('interests').textContent;
+
+            cont.style.display = 'none';
+            contEdit.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
