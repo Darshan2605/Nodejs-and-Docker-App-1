@@ -48,7 +48,7 @@ Step 1: start mongodb and mongo-express
     
 _You can access the mongo-express under localhost:8080 from your browser_
 
-    ![Screenshot 2025-01-11 233228](https://github.com/user-attachments/assets/334bd3a3-7ee8-4865-b5a8-a8e33c15d373)
+![Screenshot 2025-01-11 233228](https://github.com/user-attachments/assets/334bd3a3-7ee8-4865-b5a8-a8e33c15d373)
 
 Step 2: in mongo-express UI - create a new database "my-db"
 ![Screenshot 2025-01-11 233242](https://github.com/user-attachments/assets/dd0c6b65-ce02-462e-9119-f360d239a87b)
