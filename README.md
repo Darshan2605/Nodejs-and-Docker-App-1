@@ -37,7 +37,7 @@ Step 6: Start your nodejs application locally - go to `app` directory of project
 Step 7: Access you nodejs application UI from browser
 
     http://localhost:3000
-![Screenshot 2025-01-11 233110](https://github.com/user-attachments/assets/02a72a8c-c096-4a0f-802d-37df243b31f2)
+![Screenshot 2025-01-11 233029](https://github.com/user-attachments/assets/101db60a-1601-49a2-9bab-61cf44f230f7)
 
 
     
