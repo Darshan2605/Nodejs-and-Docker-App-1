@@ -23,8 +23,11 @@ _NOTE: creating docker-network in optional. You can start both containers in a d
 Step 4: open mongo-express from browser
 
     http://localhost:8081
+![Screenshot 2025-01-11 233242](https://github.com/user-attachments/assets/3af6a723-3daa-4c87-996a-69ad2e41e66b)
 
 Step 5: create `user-account` _db_ and `users` _collection_ in mongo-express
+![Screenshot 2025-01-11 233254](https://github.com/user-attachments/assets/2807a90c-5079-4cc0-9b13-bf296caba984)
+![Screenshot 2025-01-11 233308](https://github.com/user-attachments/assets/0e2ac16a-d8be-4bd0-906b-4511665bf236)
 
 Step 6: Start your nodejs application locally - go to `app` directory of project 
 
@@ -34,6 +37,7 @@ Step 6: Start your nodejs application locally - go to `app` directory of project
 Step 7: Access you nodejs application UI from browser
 
     http://localhost:3000
+![Screenshot 2025-01-11 233110](https://github.com/user-attachments/assets/02a72a8c-c096-4a0f-802d-37df243b31f2)
 
 
     
