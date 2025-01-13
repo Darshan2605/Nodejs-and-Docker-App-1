@@ -1,9 +1,21 @@
 version: '3'
 services:
-  # my-app:
-  # image: ${docker-registry}/my-app:1.0
-  # ports:
-  # - 3000:3000
+#if you want all 3 services(app,mongo-express,mongodb) on Docker Container----use this file
+#if you want your app locally and mongo-express and mongodb on Docker Container----comment the app service.
+  my-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=password
+    depends_on:
+      - mongodb
+    networks:
+      - mongo-network
+
   mongodb:
     image: mongo
     ports:
@@ -13,6 +25,9 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=password
     volumes:
       - mongo-data:/data/db
+    networks:
+      - mongo-network
+
   mongo-express:
     image: mongo-express
     restart: always # fixes MongoNetworkError when mongodb is not ready when mongo-express starts
@@ -24,6 +39,15 @@ services:
       - ME_CONFIG_BASICAUTH_USERNAME=newadmin
       - ME_CONFIG_BASICAUTH_PASSWORD=newpassword
       - ME_CONFIG_MONGODB_SERVER=mongodb
+    depends_on:
+      - mongodb
+    networks:
+      - mongo-network
+
+networks:
+  mongo-network:
+    driver: bridge
+
 volumes:
   mongo-data:
     driver: local
